@@ -2,7 +2,7 @@
 
 BLADE_SRC_ROOT=$(shell pwd)
 
-GO_ENV=CGO_ENABLED=1
+GO_ENV=CGO_ENABLED=1  GOPROXY=https://goproxy.cn,direct
 GO_MODULE=GO111MODULE=on
 GO=env $(GO_ENV) $(GO_MODULE) go
 GO_FLAGS=-ldflags="-s -w"
@@ -53,7 +53,7 @@ build_linux:
 		-v $(shell echo -n ${GOPATH}):/go \
 		-v $(BLADE_SRC_ROOT):/chaosblade-exec-os \
 		-w /chaosblade-exec-os \
-		chaosblade-os-build-musl:latest
+		chaosblade-os-build-musl:tuhu
 
 # test
 test:
