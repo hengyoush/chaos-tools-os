@@ -17,6 +17,7 @@
 package model
 
 import (
+	"github.com/chaosblade-io/chaosblade-spec-go/channel"
 	"github.com/chaosblade-io/chaosblade-spec-go/spec"
 
 	"github.com/chaosblade-io/chaosblade-exec-os/exec"
@@ -41,22 +42,6 @@ func GetSHHExecutor() spec.Executor {
 	return exec.NewSSHExecutor()
 }
 
-// GetAllExpModels returns the experiment model specs in the project.
-// Support for other project about chaosblade
-func GetAllExpModels() []spec.ExpModelCommandSpec {
-	return []spec.ExpModelCommandSpec{
-		exec.NewCpuCommandModelSpec(),
-		exec.NewMemCommandModelSpec(),
-		exec.NewProcessCommandModelSpec(),
-		exec.NewNetworkCommandSpec(),
-		exec.NewDiskCommandSpec(),
-		exec.NewScriptCommandModelSpec(),
-		exec.NewFileCommandSpec(),
-		exec.NewKernelInjectCommandSpec(),
-		exec.NewSystemdCommandModelSpec(),
-	}
-}
-
 func ExtractExecutorFromExpModel(expModel spec.ExpModelCommandSpec) map[string]spec.Executor {
 	executors := make(map[string]spec.Executor)
 	for _, actionModel := range expModel.Actions() {
@@ -78,4 +63,46 @@ func GetSSHExpFlags() []spec.ExpFlagSpec {
 		exec.InstallPath,
 	}
 	return flags
+}
+
+var UidFlag = spec.ExpFlag{
+	Name:    "uid",
+	Desc:    "uid",
+	Default: "",
+}
+
+var DebugFlag = spec.ExpFlag{
+	Name:    "debug",
+	Desc:    "debug",
+	Default: "",
+}
+
+var ChannelFlag = spec.ExpFlag{
+	Name:    "channel",
+	Desc:    "channel",
+	Default: "local",
+}
+
+var NsTargetFlag = spec.ExpFlag{
+	Name:    channel.NSTargetFlagName,
+	Desc:    "target pid",
+	Default: "",
+}
+
+var NsPidFlag = spec.ExpFlag{
+	Name:    channel.NSPidFlagName,
+	Desc:    "pid namespace",
+	Default: "false",
+}
+
+var NsMntFlag = spec.ExpFlag{
+	Name:    channel.NSMntFlagName,
+	Desc:    "mnt namespace",
+	Default: "false",
+}
+
+var NsNetFlag = spec.ExpFlag{
+	Name:    channel.NSNetFlagName,
+	Desc:    "net namespace",
+	Default: "false",
 }
