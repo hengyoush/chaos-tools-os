@@ -53,7 +53,7 @@ build_linux:
 		-v $(shell echo -n ${GOPATH}):/go \
 		-v $(BLADE_SRC_ROOT):/chaosblade-exec-os \
 		-w /chaosblade-exec-os \
-		chaosblade-os-build-musl:tuhu
+		chaosblade-os-build-musl:latest
 
 # test
 test:
