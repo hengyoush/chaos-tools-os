@@ -220,6 +220,7 @@ func buildMaskForRange(start, end int) [][]int {
 			}
 		}
 		masks = append(masks, []int{cur, mask})
+		cur = cur + (1 << cnt)
 	}
 	return masks
 }
