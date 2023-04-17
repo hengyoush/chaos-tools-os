@@ -201,7 +201,7 @@ func buildMaskForRange(start, end int) [][]int {
 	cur := start
 	masks := make([][]int, 0)
 	for cur <= end {
-		x := 1 << (bits.Len(uint(cur)) - 1)
+		x := (1 << (bits.Len(uint(cur)) - 1)) - 1
 		if end < x {
 			x = end
 		}
