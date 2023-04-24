@@ -211,8 +211,14 @@ func buildMaskForRange(start, end int) [][]int {
 		}
 		mask := ^0
 		cnt := 0
-		for cnt < o {
-			if cur+(1<<cnt)-1 > x {
+		for {
+			upper := cur + (1 << cnt) - 1
+			if cnt == o && upper <= x {
+				break
+			}
+			if upper > x {
+				mask = mask >> 1
+				cnt--
 				break
 			} else {
 				mask <<= 1
